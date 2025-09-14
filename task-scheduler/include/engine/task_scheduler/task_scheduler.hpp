@@ -3,7 +3,7 @@
  * @author podumai kirillsm05@gmail.com
  * @details This is only the test example that I wrote to
  *          examine the user-level threads scheduling
- *          (very simple approach) using
+ *          (very simple approach) using "first come, first served" strategy.
  */
 
 #pragma once
@@ -23,7 +23,7 @@ namespace engine
 /**
  * @class TaskScheduler
  * @brief Class that schedules fibers.
- * @details TaskScheduler provides preemtive scheduling policy.
+ * @details TaskScheduler provides "first come, first served" scheduling policy.
  */
 class TaskScheduler final
 {
