@@ -39,10 +39,21 @@ class TaskScheduler final
   { }
 
  public:
-  TaskScheduler(const TaskScheduler&) = delete ("Only one instance of TaskSchedular can be created.");
-  TaskScheduler(TaskScheduler&&) = delete ("Only one instance of TaskSchedular can be created.");
-  auto operator=(const TaskScheduler&) -> TaskScheduler = delete ("Only one instance of TaskSchedular can be created.");
-  auto operator=(TaskScheduler&&) -> TaskScheduler& = delete ("Only one instance of TaskSchedular can be created.");
+  TaskScheduler(  //
+    const TaskScheduler&
+  ) = delete ("Only one instance of TaskSchedular can be created.");
+
+  TaskScheduler(  //
+    TaskScheduler&&
+  ) = delete ("Only one instance of TaskSchedular can be created.");
+
+  auto operator=(  //
+    const TaskScheduler&
+  ) -> TaskScheduler& = delete ("Only one instance of TaskSchedular can be created.");
+
+  auto operator=(  //
+    TaskScheduler&&
+  ) -> TaskScheduler& = delete ("Only one instance of TaskSchedular can be created.");
 
   /**
    * @public
@@ -99,7 +110,7 @@ class TaskScheduler final
    *
    * @tparam Function Generic function type that satisfies boost::context::fiber signature.
    * @param[in] f Function that will be executed in new fiber.
-   * 
+   *
    * @throws std::runtime_error if push operation failed.
    */
   template<typename Function>
@@ -107,7 +118,7 @@ class TaskScheduler final
     Function&& f
   ) -> void
   {
-    auto task{std::make_shared<boost::context::fiber>(std::forward<Function>(f))};
+    auto task{std::make_shared<fiber>(std::forward<Function>(f))};
     if (tasks_.push(task) == false)
     {
       throw std::runtime_error{"TaskScheduler::PushTask() -> task queue limit"};
